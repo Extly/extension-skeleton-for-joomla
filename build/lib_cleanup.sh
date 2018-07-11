@@ -3,7 +3,7 @@
 LIB_FOLDER="library"
 VENDOR_LIB_FOLDER="library/vendor"
 
-rm -rf $VENDOR_LIB_FOLDER
+# rm -rf $VENDOR_LIB_FOLDER
 composer update --no-dev -d $LIB_FOLDER
 
 rm -rf  $VENDOR_LIB_FOLDER/apache
@@ -36,6 +36,7 @@ find $VENDOR_LIB_FOLDER/ -type d -name "Testing" -not -path "library/vendor/lara
 find $VENDOR_LIB_FOLDER/ -type d -name "tests" -exec rm -fr '{}' ';'
 find $VENDOR_LIB_FOLDER/ -type d -name "Tests" -exec rm -fr '{}' ';'
 
+find $VENDOR_LIB_FOLDER/ -type f -name ".coveralls.yml" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name ".editorconfig" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name ".gitattributes" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name ".gitignore" -delete
@@ -62,6 +63,7 @@ find $VENDOR_LIB_FOLDER/ -type f -name "CHANGES" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "circle.yml" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "CODE_OF_CONDUCT.md" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "composer.lock" -delete
+find $VENDOR_LIB_FOLDER/ -type f -name "CONDUCT.md" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "CONTRIBUTING.md" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "COPYING" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "db.sql" -delete
@@ -73,6 +75,7 @@ find $VENDOR_LIB_FOLDER/ -type f -name "htmLawed_README*" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "htmLawed_TESTCASE.txt" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "htmLawedTest.php" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "Makefile" -delete
+find $VENDOR_LIB_FOLDER/ -type f -name "mkdocs.yml" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "package.xml" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "phpcs.xml.dist" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "phpcs.xml" -delete
@@ -82,9 +85,9 @@ find $VENDOR_LIB_FOLDER/ -type f -name "phpunit*.xml" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "psalm.xml" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "puli.json" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "README.markdown" -delete
-find $VENDOR_LIB_FOLDER/ -type f -name "readme.md" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "README.md" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "Readme.md" -delete
+find $VENDOR_LIB_FOLDER/ -type f -name "readme.md" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "README.rst" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "ReadMe.txt" -delete
 find $VENDOR_LIB_FOLDER/ -type f -name "sonar-project.properties" -delete
