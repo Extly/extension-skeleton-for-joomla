@@ -47,11 +47,6 @@ var releaseDirAbs = path.resolve(__dirname, releaseDir);
 fsExtra.removeSync(releaseDirAbs);
 fs.mkdirSync(releaseDirAbs);
 
-// Uglify Js
-// generationPlugins.push(new UglifyJsPlugin({
-//   include: /\/component\/media\/com_foo\/js\/script\.js/,
-// }));
-
 // Templates and Translations generation
 var tagTransformation = content => content
   .toString()
@@ -206,6 +201,7 @@ if (packageMode) {
 
 // Webpack execution
 module.exports = {
+  mode: 'production',
   entry: './.gitkeep',
   output: {
     filename: '.gitkeep',

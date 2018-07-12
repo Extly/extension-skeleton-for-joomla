@@ -12,7 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix
-  .babel('src/app.js', 'dist/app.min.js');
+  .js('src/app.js', 'dist/app.min.js')
+  .copy('dist/app.min.js', '../library/media/app/js/app.min.js');
 
 // Full API
 // mix.js(src, output);
