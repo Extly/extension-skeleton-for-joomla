@@ -8,6 +8,7 @@
 jsconfig.json
 .php_cs.dist
 .php_cs
+.gitkeep
 
 # Composer
 composer.phar
@@ -18,45 +19,41 @@ composer.lock
 node_modules/
 
 # Cordova
-hooks/
-platforms/
-plugins/
-typings/
+/hooks/
+/platforms/
+#/plugins/
+/typings/
 
-# Build files
-build
-
-# Release directory
-release
+# Build files - Release directory
+/build/release
+/build/templates/platform
+/platform
 
 # Test configuration
-tests/config.php
-Tests/config.php
+/tests/config.php
+/Tests/config.php
 
 # Version and manifest files
-component/*.xml
-modules/*/*/*.xml
-plugins/*/*/*.xml
+/component/*.xml
+/modules/*/*/*.xml
+/plugins/*/*/*.xml
 
 # Language files (symlinked)
-component/language/*
-modules/*/*/language/*
-plugins/*/*/language/*
+/component/language/*
+/modules/*/*/language/*
+/plugins/*/*/language/*
 
 # Ionic
 .sourcemaps/
 tslint.json
-www/assets/*
-www/build/*
+/www/assets/*
+/www/build/*
 
 # App for Joomla
-app/dist/
-app/etc/
-app/mix-manifest.json
-library/media/app/dist/
-library/media/service/
+/component/media/app/
+/component/media/service/
 
 # Symfony
-var/
+/var/
 
 # Symlinks
