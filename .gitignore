@@ -20,7 +20,7 @@ node_modules/
 
 # Cordova
 /hooks/
-/platforms/
+#/platforms/
 #/plugins/
 /typings/
 
