@@ -14,10 +14,10 @@ That's it; you have a package with everything. To customize, delete what you ain
 
 This project has been created to standarize the creation of extensions for Joomla. It provides a quick way to initialize a project to create any type of extension. According to my experience, this is the most common scenario:
 
-- NEW: A JavaScript App
+- NEW: A JavaScript App. For instance, to create Single Page Application (SPA) for Joomla.
 - A Component
 - CLI (file) scripts
-- A Library, packing [Composer](https://getcomposer.org/) libraries
+- A Library, packing [Composer](https://getcomposer.org/) libraries or any other framework.
 - Modules
 - Plugins
 - A Template
@@ -41,7 +41,7 @@ This project has been created to standarize the creation of extensions for Jooml
 - Support of React, Preact, Babel, Vue, etc
 - It can also be extended with other Webpack plugins
 
-## Why Webpack-automated Boilerplate files for Joomla! extensions ?
+## Why Webpack-automated Boilerplate files for Joomla! extensions?
 
 [Webpack](https://webpack.js.org/) is a module bundler. Its primary purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, grouping, or packaging just about any resource or asset. So, this is an implementation to build any Joomla extension in a package that includes: a component, modules, plugins, a CLI script and a template.
 
@@ -124,6 +124,11 @@ The Webpack builds the extensions from templates and translations, based on the 
 - `build/lib_*.sh`, to manage the library
 
 ## Changelog
+
+### 2.2.0
+
+- Optimization: webpack.config.js reorganization to build a package or independent ZIP files (but not both)
+- Several minor improvements
 
 ### 2.1.0
 
