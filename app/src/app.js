@@ -22,6 +22,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-jQuery(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
   console.log('Ready!');
 });
