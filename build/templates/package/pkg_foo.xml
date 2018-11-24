@@ -26,9 +26,10 @@
     <!-- <file type="module" client="administrator" id="mod_[EXTENSION_ALIAS]">mod_[EXTENSION_ALIAS]</file> -->
 
     <!-- Library -->
-    <file type="library" id="lib_[EXTENSION_ALIAS]">library</file>
+    <file type="library" id="[EXTENSION_ALIAS]">library</file>
 
     <!-- Plugins: [EXTENSION_ALIAS]  -->
+    <file type="plugin" group="ajax" id="[EXTENSION_ALIAS]">plg_ajax_[EXTENSION_ALIAS]</file>
     <file type="plugin" group="authentication" id="[EXTENSION_ALIAS]">plg_authentication_[EXTENSION_ALIAS]</file>
     <file type="plugin" group="behaviour" id="[EXTENSION_ALIAS]">plg_behaviour_[EXTENSION_ALIAS]</file>
     <file type="plugin" group="content" id="[EXTENSION_ALIAS]">plg_content_[EXTENSION_ALIAS]</file>

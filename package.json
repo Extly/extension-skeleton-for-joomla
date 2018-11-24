@@ -1,6 +1,6 @@
 {
   "name": "extly-boilerplate-buildfiles-for-joomla",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Boilerplate files for Joomla! extensions.",
   "main": "webpack.config.js",
   "scripts": {
@@ -21,20 +21,20 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "copy-webpack-plugin": "^4.5.1",
-    "eslint": "^4.19.1",
+    "dotenv-webpack": "^1.5.7",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
+    "eslint": "^4.19.1",
     "fs-extra": "^6.0.1",
     "fs-readdir-recursive": "^1.1.0",
     "moment": "^2.22.2",
-    "webpack": "^4.12.0",
-    "webpack-cli": "^2.1.5",
+    "npm": "^6.4.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack-cli": "^3.1.2",
     "webpack-zip-files-plugin": "^1.0.0",
-    "dotenv-webpack": "^1.5.7",
-    "npm": "^6.1.0",
-    "uglifyjs-webpack-plugin": "^1.2.5"
+    "webpack": "^4.26.0"
   },
   "dependencies": {}
 }

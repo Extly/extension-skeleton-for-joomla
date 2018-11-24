@@ -67,7 +67,7 @@ class Pkg_[EXTENSION_CLASS_NAME]InstallerScript
 	 * @var array
 	 */
 	protected $extensionsToEnable = array(
-		// ['plugin', 'xxx', 1, '[EXTENSION_ALIAS]'],
+		// ['plugin', '[EXTENSION_ALIAS]', 1, 'system' ],
 	);
 
 	/**

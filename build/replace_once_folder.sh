@@ -2,10 +2,10 @@
 
 # A handy bash script to be execute only once on the extension-specific directories
 
-EXTENSION_NAME="XT Search for Algolia"
-EXTENSION_ALIAS="xtdir4alg"
-EXTENSION_CLASS_NAME="Xtdir4alg"
-TRANSLATION_KEY="XTDIR4ALG"
+EXTENSION_NAME="XT Twilio for Joomla"
+EXTENSION_ALIAS="xttwilio"
+EXTENSION_CLASS_NAME="XTTwilio"
+TRANSLATION_KEY="XTTWILIO"
 
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[EXTENSION_NAME\]/$EXTENSION_NAME/g" {} \;
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[PACKAGE_NAME\]/$EXTENSION_NAME/g" {} \;
@@ -21,6 +21,8 @@ find $1 -name "*.php" -type f -exec sed -i "s/new Foo/new $EXTENSION_CLASS_NAME/
 find $1 -name "*.php" -type f -exec sed -i "s/foo/$EXTENSION_ALIAS/g" {} \;
 find $1 -name "*.php" -type f -exec sed -i "s/FooInstaller/${EXTENSION_CLASS_NAME}Installer/g" {} \;
 find $1 -name "*.php" -type f -exec sed -i "s/Foo extends/$EXTENSION_CLASS_NAME extends/g" {} \;
+
+find $1 -name "*.json" -type f -exec sed -i "s/Foo Name/$EXTENSION_NAME/g" {} \;
 
 find $1 -name "*.ini" -type f -exec sed -i "s/\_FOO\=/\_$TRANSLATION_KEY\=/g" {} \;
 find $1 -name "*.ini" -type f -exec sed -i "s/\_FOO\_/\_$TRANSLATION_KEY\_/g" {} \;

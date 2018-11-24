@@ -6,7 +6,7 @@
   <name>Foo Name</name>
   <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tempus dolor at purus auctor, eget porta justo tempor. Vivamus finibus facilisis eros, at fringilla dolor dictum vitae.</description>
   <version>1.0.0</version>
-  <creationDate>2018-06-22</creationDate>
+  <creationDate>2018-11-24</creationDate>
 
 	<author>Andrea Gentil - Anibal Sanchez</author>
 	<authorEmail>team@extly.com</authorEmail>
@@ -30,9 +30,10 @@
     <!-- <file type="module" client="administrator" id="mod_foo">mod_foo</file> -->
 
     <!-- Library -->
-    <file type="library" id="lib_foo">library</file>
+    <file type="library" id="foo">library</file>
 
     <!-- Plugins: foo  -->
+    <file type="plugin" group="ajax" id="foo">plg_ajax_foo</file>
     <file type="plugin" group="authentication" id="foo">plg_authentication_foo</file>
     <file type="plugin" group="behaviour" id="foo">plg_behaviour_foo</file>
     <file type="plugin" group="content" id="foo">plg_content_foo</file>
