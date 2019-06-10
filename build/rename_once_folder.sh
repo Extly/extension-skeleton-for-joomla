@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# A handy bash script to be execute only once on the extension-specific directories
+# A handy bash script to be executed only once on the extension-specific directories
 
 EXTENSION_NAME="XT Twilio for Joomla"
 EXTENSION_ALIAS="xttwilio"
