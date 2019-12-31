@@ -155,5 +155,5 @@ The Webpack builds the extensions from templates and translations, based on the 
 
 ## Copyright
 
-- Copyright (c)2007-2018 Andrea Gentil - Anibal Sanchez. All rights reserved.
+- Copyright (c)2012-2020 Andrea Gentil - Anibal Sanchez. All rights reserved.
 - Distributed under the GNU General Public License version 2 or later

@@ -3,7 +3,7 @@
  * @package    Foo Name
  *
  * @author     Andrea Gentil - Anibal Sanchez <team@extly.com>
- * @copyright  Copyright (c)2007-2018 Andrea Gentil - Anibal Sanchez All rights reserved.
+ * @copyright  Copyright (c)2012-2020 Andrea Gentil - Anibal Sanchez All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  * @link       https://www.extly.com
  */
