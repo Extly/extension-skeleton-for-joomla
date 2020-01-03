@@ -59,6 +59,8 @@ To create installable the zip packages, the project must be initialized with [We
 
 `npm install`
 
+Of course, you can install without checking if everything is updated: `npm ci`.
+
 ### Requirements
 
 - Joomla 3.8, Joomla 4 or superior
@@ -116,12 +118,19 @@ JS_COPYRIGHT="/*!%CR% * [EXTENSION_NAME]%CR% *%CR% * @license [LICENSE_CODE]%CR%
 CSS_COPYRIGHT="/*!%CR% * [EXTENSION_NAME]%CR% *%CR% * @license [LICENSE_CODE]%CR% * @version [RELEASE_VERSION]%CR% * @author  [AUTHOR], [AUTHOR_URL]%CR% * @updated [DATE]%CR% * @link    [AUTHOR_URL]%CR% *%CR% */%CR%"
 ```
 
-## Handy Bash Scripts
+## Handy Bash Script
 
 The Webpack builds the extensions from templates and translations, based on the .env constants. However, the first time the project is created, there is a boring task of replacing Foo in every file of the project. To simplify the task, check the `build/replace_once.sh` and `build/replace_once_folder.sh` scripts, they replace the Foo string in most of the files for you ;-).
 
-- `build/replace_once.sh`, to replace the Foo string in most of the files for you
-- `build/lib_*.sh`, to manage the library
+- `build/rename-and-replace_once.sh`, to replace the Foo string in most of the files for you
+
+A handy bash script to be executed only once on the extension-specific directories:
+
+### How to use the Handy Bash Script
+
+- Open `rename_once_folder.sh`, and edit/customize the variables (copy-paste from the .env file)
+- Open `replace_once_folder.sh`, and edit/customize the variables (copy-paste from the .env file)
+- From the project root folder, execute `build/rename-and-replace_once.sh`
 
 ## Changelog
 
