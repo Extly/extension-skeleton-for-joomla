@@ -147,6 +147,8 @@ function generatePackage() {
     pkgEntries.push(item);
   });
 
+  const Dirs = new Map();
+
   // Add all extension types directories into the package
   extensionTypesDirs.forEach((extensionTypeDir) => {
     const extTemplates = readDirRecursive(
@@ -165,9 +167,13 @@ function generatePackage() {
         dist: path.basename(srcDir),
       };
 
-      pkgEntries.push(item);
+      if (!Dirs.has(srcDir)) {
+        Dirs.set(srcDir, item);
+      }
     });
   });
+
+  pkgEntries.push(...Dirs.values());
 
   // Complete the definition of the zip file
   const outputFile = path.resolve(
