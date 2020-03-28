@@ -109,7 +109,7 @@ AUTHOR_EMAIL=team@extly.com
 
 TRANSLATION_KEY=FOO
 
-COPYRIGHT=Copyright (c)2007-[YEAR] [AUTHOR] All rights reserved.
+COPYRIGHT=Copyright (c)2012-[YEAR] [AUTHOR] All rights reserved.
 MANIFEST_COPYRIGHT="%TAB%<author>[AUTHOR]</author>%CR%%TAB%<authorEmail>[AUTHOR_EMAIL]</authorEmail>%CR%%TAB%<authorUrl>[AUTHOR_URL]</authorUrl>%CR%%TAB%<copyright>[COPYRIGHT]</copyright>%CR%%TAB%<license>[LICENSE_CODE]</license>"
 TRANSLATION_COPYRIGHT=";%CR%; [AUTHOR] <[AUTHOR_EMAIL]>%CR%; [COPYRIGHT]%CR%; License [LICENSE]%CR%;"
 
