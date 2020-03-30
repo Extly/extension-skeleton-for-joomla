@@ -156,6 +156,10 @@ function generatePackage() {
     );
 
     extTemplates.forEach((extTemplate) => {
+      if (!extTemplate.endsWith('.xml')) {
+        return null;
+      }
+
       const srcFile = path.resolve(
         __dirname,
         `${extensionTypeDir}/${extTemplate}`,
