@@ -2,10 +2,10 @@
 
 # A handy bash script to be executed only once on the extension-specific directories
 
-EXTENSION_NAME="XT Twilio for Joomla"
-EXTENSION_ALIAS="xttwilio"
-EXTENSION_CLASS_NAME="XTTwilio"
-TRANSLATION_KEY="XTTWILIO"
+EXTENSION_NAME="The New Name for Joomla"
+EXTENSION_ALIAS="thenewname"
+EXTENSION_CLASS_NAME="TheNewName"
+TRANSLATION_KEY="THE_NEW_NAME"
 
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[EXTENSION_NAME\]/$EXTENSION_NAME/g" {} \;
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[PACKAGE_NAME\]/$EXTENSION_NAME/g" {} \;
