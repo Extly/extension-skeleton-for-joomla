@@ -22,6 +22,8 @@ const extensionTypesDirs = [
   'platform',
 ];
 
+const packageIgnoreFiles = ['config.xml'];
+
 // Required plugins
 const path = require('path');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
@@ -33,8 +35,10 @@ const Dotenv = require('dotenv-webpack');
 const moment = require('moment');
 
 let definitions;
-const releaseDate = moment().format('YYYY-MM-DD');
-const year = moment().format('YYYY');
+const releaseDate = moment()
+  .format('YYYY-MM-DD');
+const year = moment()
+  .format('YYYY');
 const releaseDir = 'build/release';
 const releaseDirAbs = path.resolve(__dirname, releaseDir);
 const templatesDir = 'build/templates';
@@ -45,16 +49,17 @@ function loadEnvironmentDefinitions() {
   const defs = {};
 
   const env = new Dotenv();
-  Object.keys(env.definitions).forEach((definition) => {
-    const key = definition.replace('process.env.', '');
-    let value = env.definitions[definition];
+  Object.keys(env.definitions)
+    .forEach((definition) => {
+      const key = definition.replace('process.env.', '');
+      let value = env.definitions[definition];
 
-    value = value.replace(/^"(.+(?="$))"$/, '$1');
-    value = value.replace(/%CR%/g, '\n');
-    value = value.replace(/%TAB%/g, '\t');
+      value = value.replace(/^"(.+(?="$))"$/, '$1');
+      value = value.replace(/%CR%/g, '\n');
+      value = value.replace(/%TAB%/g, '\t');
 
-    defs[key] = value;
-  });
+      defs[key] = value;
+    });
 
   return defs;
 }
@@ -65,27 +70,27 @@ function removeReleaseDirectory() {
 }
 
 const tagTransformation = (content) => content
-    .toString()
-    .replace(/\[MANIFEST_COPYRIGHT\]/g, definitions.MANIFEST_COPYRIGHT)
-    .replace(/; \[TRANSLATION_COPYRIGHT\]/g, definitions.TRANSLATION_COPYRIGHT)
-    .replace('// [PHP_COPYRIGHT]', definitions.PHP_COPYRIGHT)
-    .replace('/* [CSS_COPYRIGHT] */', definitions.CSS_COPYRIGHT)
-    .replace('// [JS_COPYRIGHT]', definitions.JS_COPYRIGHT)
-    .replace(/\[COPYRIGHT\]/g, definitions.COPYRIGHT)
-    .replace(/\[AUTHOR_EMAIL\]/g, definitions.AUTHOR_EMAIL)
-    .replace(/\[AUTHOR_URL\]/g, definitions.AUTHOR_URL)
-    .replace(/\[AUTHOR\]/g, definitions.AUTHOR)
-    .replace(/\[EXTENSION_CDN\]/g, definitions.EXTENSION_CDN)
-    .replace(/\[EXTENSION_CLASS_NAME\]/g, definitions.EXTENSION_CLASS_NAME)
-    .replace(/\[EXTENSION_ALIAS\]/g, definitions.EXTENSION_ALIAS)
-    .replace(/\[EXTENSION_DESC\]/g, definitions.EXTENSION_DESC)
-    .replace(/\[EXTENSION_NAME\]/g, definitions.EXTENSION_NAME)
-    .replace(/\[LICENSE_CODE\]/g, definitions.LICENSE_CODE)
-    .replace(/\[LICENSE\]/g, definitions.LICENSE)
-    .replace(/\[RELEASE_VERSION\]/g, definitions.RELEASE_VERSION)
-    .replace(/\[TRANSLATION_KEY\]/g, definitions.TRANSLATION_KEY)
-    .replace(/\[DATE\]/g, releaseDate)
-    .replace(/\[YEAR\]/g, year);
+  .toString()
+  .replace(/\[MANIFEST_COPYRIGHT\]/g, definitions.MANIFEST_COPYRIGHT)
+  .replace(/; \[TRANSLATION_COPYRIGHT\]/g, definitions.TRANSLATION_COPYRIGHT)
+  .replace('// [PHP_COPYRIGHT]', definitions.PHP_COPYRIGHT)
+  .replace('/* [CSS_COPYRIGHT] */', definitions.CSS_COPYRIGHT)
+  .replace('// [JS_COPYRIGHT]', definitions.JS_COPYRIGHT)
+  .replace(/\[COPYRIGHT\]/g, definitions.COPYRIGHT)
+  .replace(/\[AUTHOR_EMAIL\]/g, definitions.AUTHOR_EMAIL)
+  .replace(/\[AUTHOR_URL\]/g, definitions.AUTHOR_URL)
+  .replace(/\[AUTHOR\]/g, definitions.AUTHOR)
+  .replace(/\[EXTENSION_CDN\]/g, definitions.EXTENSION_CDN)
+  .replace(/\[EXTENSION_CLASS_NAME\]/g, definitions.EXTENSION_CLASS_NAME)
+  .replace(/\[EXTENSION_ALIAS\]/g, definitions.EXTENSION_ALIAS)
+  .replace(/\[EXTENSION_DESC\]/g, definitions.EXTENSION_DESC)
+  .replace(/\[EXTENSION_NAME\]/g, definitions.EXTENSION_NAME)
+  .replace(/\[LICENSE_CODE\]/g, definitions.LICENSE_CODE)
+  .replace(/\[LICENSE\]/g, definitions.LICENSE)
+  .replace(/\[RELEASE_VERSION\]/g, definitions.RELEASE_VERSION)
+  .replace(/\[TRANSLATION_KEY\]/g, definitions.TRANSLATION_KEY)
+  .replace(/\[DATE\]/g, releaseDate)
+  .replace(/\[YEAR\]/g, year);
 
 function renderTemplates() {
   const renderTpls = [];
@@ -123,7 +128,8 @@ function isPackageType() {
   let packageMode = false;
 
   try {
-    packageMode = fs.lstatSync(packageDirAbs).isDirectory();
+    packageMode = fs.lstatSync(packageDirAbs)
+      .isDirectory();
   } catch (e) {
     console.log('Package definition not detected.');
   }
@@ -160,15 +166,22 @@ function generatePackage() {
         return null;
       }
 
+      const extTemplateFile = path.parse(extTemplate).base;
+
+      if (packageIgnoreFiles.includes(extTemplateFile)) {
+        return;
+      }
+
       const srcFile = path.resolve(
         __dirname,
         `${extensionTypeDir}/${extTemplate}`,
       );
       const srcDir = path.dirname(srcFile);
+      const distKey = path.basename(srcDir);
 
       const item = {
         src: srcDir,
-        dist: path.basename(srcDir),
+        dist: distKey,
       };
 
       if (!Dirs.has(srcDir)) {
@@ -234,12 +247,10 @@ function generateZips() {
         );
 
         const zipFile = {
-          entries: [
-            {
-              src: srcDir,
-              dist: extElement,
-            },
-          ],
+          entries: [{
+            src: srcDir,
+            dist: extElement,
+          }, ],
           output: outputFile,
           format: 'zip',
         };
