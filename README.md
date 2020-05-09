@@ -134,7 +134,7 @@ A handy bash script to be executed only once on the extension-specific directori
 
 ### Clean Deveveloment Assets
 
-The `webpack.config.js` now includes the configuration of the development assets to be cleaned before builds. For instance, the `node_modules`. By default it is disabled, feel free to confure it. Sample configuration:
+The `webpack.config.js` now includes the configuration of the development assets to be cleaned before builds. For instance, the `node_modules`. By default it is disabled, feel free to configure it to meet your requirements. Sample configuration:
 
 ```javascript
 const globalCleanDevAssets = [
