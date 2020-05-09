@@ -132,7 +132,23 @@ A handy bash script to be executed only once on the extension-specific directori
 - Open `replace_once_folder.sh`, and edit/customize the variables (copy-paste from the .env file)
 - From the project root folder, execute `build/rename-and-replace_once.sh`
 
+### Clean Deveveloment Assets
+
+The `webpack.config.js` now includes the configuration of the development assets to be cleaned before builds. For instance, the `node_modules`. By default it is disabled, feel free to confure it. Sample configuration:
+
+```javascript
+const globalCleanDevAssets = [
+  /\/node_modules\//,
+];
+```
+
+You can find that I use to clean many more files... I'm a little obsesive about what is included in a package ;-)
+
 ## Changelog
+
+### 3.0.0
+
+- New Global Clean Deveveloment Assets
 
 ### 2.2.0
 
