@@ -30,87 +30,89 @@ const packageIgnoreFiles = ['config.xml'];
 //  This is highly opinionated.
 //  NEVER USE A FOLDER WITH THESE NAMES IN THE FINAL PACKAGE.
 const globalCleanDevAssets = [
-/*
-  // Directories to be purged
-  /\/\.git\//,
-  /\/\.github\//,
-  /\/\.phan\//,
-  /\/\.vscode\//,
-  /\/bin\//,
-  /\/build\//,
-  /\/demo\//,
-  /\/doc\//,
-  /\/docs\//,
-  /\/Documentation\//,
-  /\/examples\//,
-  /\/ext\//,
-  /\/nbproject\//,
+  /*
+    // Directories to be purged
+    /\/\.git\//,
+    /\/\.github\//,
+    /\/\.phan\//,
+    /\/\.vscode\//,
+    /\/bin\//,
+    /\/build\//,
+    /\/demo\//,
+    /\/doc\//,
+    /\/docs\//,
+    /\/Documentation\//,
+    /\/examples\//,
+    /\/ext\//,
+    /\/nbproject\//,
+  */
   /\/node_modules\//,
-  /\/style\//,
+  /*
+    /\/style\//,
 
-  // Files to be purged
-  // Files ending with these extesion types
-  /\.neon$/,
-  /\.sh$/,
-  /\.twig$/,
-  /\.xlf$/,
+    // Files to be purged
+    // Files ending with these extesion types
+    /\.neon$/,
+    /\.sh$/,
+    /\.twig$/,
+    /\.xlf$/,
 
-  /\.coveralls\.yml$/,
-  /\.editorconfig$/,
-  /\.gitattributes$/,
-  /\.gitignore$/,
-  /\.hhconfig$/,
-  /\.Mime$/,
-  /\.php_cs\.dist$/,
-  /\.php_cs$/,
-  /\.scrutinizer\.yml$/,
-  /\.State$/,
-  /\.styleci\.yml$/,
-  /\.travis\.yml$/,
-  /AUTHORS$/,
-  /behat\.yml$/,
-  /build\.php$/,
-  /build\.properties$/,
-  /build\.xml$/,
-  /CHANGELOG\.md$/,
-  /CHANGELOG\.mdown$/,
-  /CHANGELOG$/,
-  /CHANGES$/,
-  /circle\.yml$/,
-  /CODE_OF_CONDUCT\.md$/,
-  /CONDUCT\.md$/,
-  /CONTRIBUTING\.md$/,
-  /COPYING$/,
-  /db\.sql$/,
-  /docker-compose\.yml$/,
-  /example\.php$/,
-  /FastRoute\.hhi$/,
-  /gulp-config\.ci\.json$/,
-  /Makefile$/,
-  /mkdocs\.yml$/,
-  /package\.xml$/,
-  /phpcs\.xml\.dist$/,
-  /phpcs\.xml$/,
-  /phpmd\.xml$/,
-  /phpunit\.xml\.dist$/,
-  /phpunit*\.xml$/,
-  /psalm\.xml$/,
-  /puli\.json$/,
-  /README\.markdown$/,
-  /readme\.md$/,
-  /Readme\.md$/,
-  /README\.md$/,
-  /README\.rst$/,
-  /ReadMe\.txt$/,
-  /sonar-project\.properties$/,
-  /UPGRADE_TO_2_1$/,
-  /UPGRADE_TO_2_2$/,
-  /Upgrade\.md$/,
-  /UPGRADE\.md$/,
-  /UPGRADE$/,
-  /UPGRADING\.md$/,
-  /VERSION$/,
-*/
+    /\.coveralls\.yml$/,
+    /\.editorconfig$/,
+    /\.gitattributes$/,
+    /\.gitignore$/,
+    /\.hhconfig$/,
+    /\.Mime$/,
+    /\.php_cs\.dist$/,
+    /\.php_cs$/,
+    /\.scrutinizer\.yml$/,
+    /\.State$/,
+    /\.styleci\.yml$/,
+    /\.travis\.yml$/,
+    /AUTHORS$/,
+    /behat\.yml$/,
+    /build\.php$/,
+    /build\.properties$/,
+    /build\.xml$/,
+    /CHANGELOG\.md$/,
+    /CHANGELOG\.mdown$/,
+    /CHANGELOG$/,
+    /CHANGES$/,
+    /circle\.yml$/,
+    /CODE_OF_CONDUCT\.md$/,
+    /CONDUCT\.md$/,
+    /CONTRIBUTING\.md$/,
+    /COPYING$/,
+    /db\.sql$/,
+    /docker-compose\.yml$/,
+    /example\.php$/,
+    /FastRoute\.hhi$/,
+    /gulp-config\.ci\.json$/,
+    /Makefile$/,
+    /mkdocs\.yml$/,
+    /package\.xml$/,
+    /phpcs\.xml\.dist$/,
+    /phpcs\.xml$/,
+    /phpmd\.xml$/,
+    /phpunit\.xml\.dist$/,
+    /phpunit*\.xml$/,
+    /psalm\.xml$/,
+    /puli\.json$/,
+    /README\.markdown$/,
+    /readme\.md$/,
+    /Readme\.md$/,
+    /README\.md$/,
+    /README\.rst$/,
+    /ReadMe\.txt$/,
+    /sonar-project\.properties$/,
+    /UPGRADE_TO_2_1$/,
+    /UPGRADE_TO_2_2$/,
+    /Upgrade\.md$/,
+    /UPGRADE\.md$/,
+    /UPGRADE$/,
+    /UPGRADING\.md$/,
+    /VERSION$/,
+  */
 ];
 
 // Required Webpack plugins
@@ -118,10 +120,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const moment = require('moment');
 const path = require('path');
 const readDirRecursive = require('fs-readdir-recursive');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
+const glob = require("glob");
 
 let definitions;
 const releaseDate = moment()
@@ -178,14 +182,14 @@ function loadEnvironmentDefinitions() {
   return defs;
 }
 
-function removeReleaseDirectoryAndCleanDevAssets() {
+function cleanDevAssets() {
   const cleanDevAssetsDirs = allExtensionTypesDirs.map(
       // Read all files
-      (extensionTypesDir) => readDirRecursive(
-        path.resolve(__dirname, extensionTypesDir),
+      (extensionTypesDir) => glob.sync(
+        path.resolve(__dirname, extensionTypesDir) + '/**/*', {
+          dot: true
+        }
       )
-      // Resolve to the absolute path
-      .map((file) => path.resolve(__dirname, extensionTypesDir + '/' + file))
     )
     // One flat array
     .flat()
@@ -196,11 +200,14 @@ function removeReleaseDirectoryAndCleanDevAssets() {
       });
     });
 
+  cleanDevAssetsDirs.map((file) => fsExtra.removeSync(file));
+}
+
+function removeReleaseDirectory() {
   return new FileManagerPlugin({
     onStart: {
       delete: [
         releaseDirAbs,
-        ...cleanDevAssetsDirs
       ],
       mkdir: [
         releaseDirAbs,
@@ -209,10 +216,28 @@ function removeReleaseDirectoryAndCleanDevAssets() {
   });
 }
 
-function discoverTemplates(tplDirectory, extensionType) {
-  return readDirRecursive(
-    path.resolve(__dirname, `${tplDirectory}/${extensionType}`),
-  );
+function discoverFilesToRender(tplDirectory, extensionType) {
+  const tplPath = `${tplDirectory}/${extensionType}/`;
+  const absTplPath = `${__dirname}/${tplPath}`;
+
+  return glob.sync(
+      path.resolve(__dirname, `${tplPath}**/*.@(ini|xml|php|css|js)`),
+    )
+    .map(
+      (file) => file.replace(absTplPath, '')
+    );
+}
+
+function discoverManifestTemplates(tplDirectory, extensionType) {
+  const tplPath = `${tplDirectory}/${extensionType}/`;
+  const absTplPath = `${__dirname}/${tplPath}`;
+
+  return glob.sync(
+      path.resolve(__dirname, `${tplPath}**/*.xml`),
+    )
+    .map(
+      (file) => file.replace(absTplPath, '')
+    );
 }
 
 function resolveExtensionTemplate(tplDirectory, extensionType) {
@@ -230,7 +255,8 @@ function renderTemplates() {
     // For all extension types, including the package
     allExtensionTypesDirs.forEach((extensionType) => {
       const extTplDir = resolveExtensionTemplate(tplDirectory, extensionType);
-      const templates = discoverTemplates(tplDirectory, extensionType);
+      const templates = discoverFilesToRender(tplDirectory, extensionType);
+      // const templatesDeprecated = discoverTemplateDeprecated(tplDirectory, extensionType);
 
       // For each template
       templates.forEach((file) => {
@@ -265,8 +291,13 @@ function isPackageType() {
 }
 
 function declarePackageGeneration() {
+  const packageDirAbsBar = `${packageDirAbs}/`;
+
   // Include all files from the package directory
-  const pkgFiles = readDirRecursive(packageDirAbs);
+  const pkgFiles = glob.sync(`${packageDirAbsBar}**/*`)
+    .map(
+      (file) => file.replace(packageDirAbsBar, '')
+    );
 
   // Discover extensions to be included
   const pkgEntries = pkgFiles.map((file) => {
@@ -281,9 +312,7 @@ function declarePackageGeneration() {
 
   // Add all extension types directories into the package
   extensionTypesDirs.forEach((extensionTypeDir) => {
-    const extTemplates = readDirRecursive(
-      path.resolve(__dirname, `${templatesDir}/${extensionTypeDir}`),
-    );
+    const extTemplates = discoverManifestTemplates(templatesDir, extensionTypeDir);
 
     extTemplates.forEach((extTemplate) => {
       // Exclude discovered files that are not xml
@@ -346,7 +375,7 @@ function declareZipsGeneration() {
     // For all extension types
     extensionTypesDirs.forEach((extensionType) => {
       const extZipDir = resolveExtensionTemplate(tplDirectory, extensionType);
-      const templates = discoverTemplates(tplDirectory, extensionType);
+      const templates = discoverFilesToRender(tplDirectory, extensionType);
 
       // For each template
       templates.forEach((tplFile) => {
@@ -401,8 +430,11 @@ function declareZipsGeneration() {
 // Global constant definitions (.env)
 definitions = loadEnvironmentDefinitions();
 
+// Clean the development assets before packing
+cleanDevAssets();
+
 // Start clean
-buildPlugins.push(removeReleaseDirectoryAndCleanDevAssets());
+buildPlugins.push(removeReleaseDirectory());
 
 // Render the manifests and translations
 buildPlugins.push(renderTemplates());

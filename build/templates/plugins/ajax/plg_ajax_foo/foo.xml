@@ -11,8 +11,8 @@
   <scriptfile>script.php</scriptfile>
   <!-- Language files -->
   <languages folder="language">
-    <language tag="en-GB">en-GB/en-GB.plg_AJAX_[EXTENSION_ALIAS].ini</language>
-    <language tag="en-GB">en-GB/en-GB.plg_AJAX_[EXTENSION_ALIAS].sys.ini</language>
+    <language tag="en-GB">en-GB/en-GB.plg_ajax_[EXTENSION_ALIAS].ini</language>
+    <language tag="en-GB">en-GB/en-GB.plg_ajax_[EXTENSION_ALIAS].sys.ini</language>
   </languages>
   <!-- Plugin files -->
   <files>
@@ -27,6 +27,6 @@
   </config>
 	<!-- Update servers -->
 	<updateservers>
-		<server type="extension" priority="1" name="[EXTENSION_NAME]">[EXTENSION_CDN]/update-plg_AJAX_[EXTENSION_ALIAS].xml</server>
+		<server type="extension" priority="1" name="[EXTENSION_NAME]">[EXTENSION_CDN]/update-plg_ajax_[EXTENSION_ALIAS].xml</server>
 	</updateservers>
 </extension>
