@@ -2,12 +2,12 @@
 <extension type="file" version="3.8.0" method="upgrade">
 	<name>file_foo</name>
   <version>1.0.0</version>
-	<creationDate>2019-06-10</creationDate>
+	<creationDate>2020-05-09</creationDate>
 
-	<author>Andrea Gentil - Anibal Sanchez</author>
+	<author>Extly, CB</author>
 	<authorEmail>team@extly.com</authorEmail>
 	<authorUrl>https://www.extly.com</authorUrl>
-	<copyright>Copyright (c)2012-2020 Andrea Gentil - Anibal Sanchez All rights reserved.</copyright>
+	<copyright>Copyright (c)2012-2020 Extly, CB All rights reserved.</copyright>
 	<license>GNU/GPLv2 www.gnu.org/licenses/gpl-2.0.html</license>
 
   <description><![CDATA[

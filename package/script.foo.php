@@ -2,8 +2,8 @@
 /**
  * @package    Foo Name
  *
- * @author     Andrea Gentil - Anibal Sanchez <team@extly.com>
- * @copyright  Copyright (c)2012-2020 Andrea Gentil - Anibal Sanchez All rights reserved.
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  * @link       https://www.extly.com
  */
@@ -52,7 +52,7 @@ class Pkg_FooInstallerScript
 	 *
 	 * @var   string
 	 */
-	protected $minimumPHPVersion = '5.6.0';
+	protected $minimumPHPVersion = '7.1.0';
 
 	/**
 	 * The minimum Joomla! version required to install this extension

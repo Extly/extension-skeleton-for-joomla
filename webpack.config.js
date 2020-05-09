@@ -7,7 +7,7 @@
  *
  */
 
-// Array of Generation plugins
+// Array of Webpack plugins
 let buildPlugins = [];
 
 // Extension directories to be visited
@@ -22,17 +22,106 @@ const extensionTypesDirs = [
   'platform',
 ];
 
+// Only template xml are processed,
+//  other xml config files are ignored
 const packageIgnoreFiles = ['config.xml'];
 
-// Required plugins
-const path = require('path');
-const ZipFilesPlugin = require('webpack-zip-files-plugin');
+// WARNING - Clean these development folders before building
+//  This is highly opinionated.
+//  NEVER USE A FOLDER WITH THESE NAMES IN THE FINAL PACKAGE.
+const globalCleanDevAssets = [
+/*
+  // Directories to be purged
+  /\/\.git\//,
+  /\/\.github\//,
+  /\/\.phan\//,
+  /\/\.vscode\//,
+  /\/bin\//,
+  /\/build\//,
+  /\/demo\//,
+  /\/doc\//,
+  /\/docs\//,
+  /\/Documentation\//,
+  /\/examples\//,
+  /\/ext\//,
+  /\/nbproject\//,
+  /\/node_modules\//,
+  /\/style\//,
+
+  // Files to be purged
+  // Files ending with these extesion types
+  /\.neon$/,
+  /\.sh$/,
+  /\.twig$/,
+  /\.xlf$/,
+
+  /\.coveralls\.yml$/,
+  /\.editorconfig$/,
+  /\.gitattributes$/,
+  /\.gitignore$/,
+  /\.hhconfig$/,
+  /\.Mime$/,
+  /\.php_cs\.dist$/,
+  /\.php_cs$/,
+  /\.scrutinizer\.yml$/,
+  /\.State$/,
+  /\.styleci\.yml$/,
+  /\.travis\.yml$/,
+  /AUTHORS$/,
+  /behat\.yml$/,
+  /build\.php$/,
+  /build\.properties$/,
+  /build\.xml$/,
+  /CHANGELOG\.md$/,
+  /CHANGELOG\.mdown$/,
+  /CHANGELOG$/,
+  /CHANGES$/,
+  /circle\.yml$/,
+  /CODE_OF_CONDUCT\.md$/,
+  /CONDUCT\.md$/,
+  /CONTRIBUTING\.md$/,
+  /COPYING$/,
+  /db\.sql$/,
+  /docker-compose\.yml$/,
+  /example\.php$/,
+  /FastRoute\.hhi$/,
+  /gulp-config\.ci\.json$/,
+  /Makefile$/,
+  /mkdocs\.yml$/,
+  /package\.xml$/,
+  /phpcs\.xml\.dist$/,
+  /phpcs\.xml$/,
+  /phpmd\.xml$/,
+  /phpunit\.xml\.dist$/,
+  /phpunit*\.xml$/,
+  /psalm\.xml$/,
+  /puli\.json$/,
+  /README\.markdown$/,
+  /readme\.md$/,
+  /Readme\.md$/,
+  /README\.md$/,
+  /README\.rst$/,
+  /ReadMe\.txt$/,
+  /sonar-project\.properties$/,
+  /UPGRADE_TO_2_1$/,
+  /UPGRADE_TO_2_2$/,
+  /Upgrade\.md$/,
+  /UPGRADE\.md$/,
+  /UPGRADE$/,
+  /UPGRADING\.md$/,
+  /VERSION$/,
+*/
+];
+
+// Required Webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const readDirRecursive = require('fs-readdir-recursive');
-const fs = require('fs');
-const fsExtra = require('fs-extra');
 const Dotenv = require('dotenv-webpack');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+const fs = require('fs');
 const moment = require('moment');
+const path = require('path');
+const readDirRecursive = require('fs-readdir-recursive');
+const ZipFilesPlugin = require('webpack-zip-files-plugin');
 
 let definitions;
 const releaseDate = moment()
@@ -44,30 +133,8 @@ const releaseDirAbs = path.resolve(__dirname, releaseDir);
 const templatesDir = 'build/templates';
 const translationsDir = 'build/translations';
 const packageDirAbs = path.resolve(__dirname, packageTypeDir);
-
-function loadEnvironmentDefinitions() {
-  const defs = {};
-
-  const env = new Dotenv();
-  Object.keys(env.definitions)
-    .forEach((definition) => {
-      const key = definition.replace('process.env.', '');
-      let value = env.definitions[definition];
-
-      value = value.replace(/^"(.+(?="$))"$/, '$1');
-      value = value.replace(/%CR%/g, '\n');
-      value = value.replace(/%TAB%/g, '\t');
-
-      defs[key] = value;
-    });
-
-  return defs;
-}
-
-function removeReleaseDirectory() {
-  fsExtra.removeSync(releaseDirAbs);
-  fs.mkdirSync(releaseDirAbs);
-}
+const renderDirectories = [templatesDir, translationsDir];
+const allExtensionTypesDirs = extensionTypesDirs.concat([packageTypeDir]);
 
 const tagTransformation = (content) => content
   .toString()
@@ -92,21 +159,80 @@ const tagTransformation = (content) => content
   .replace(/\[DATE\]/g, releaseDate)
   .replace(/\[YEAR\]/g, year);
 
+function loadEnvironmentDefinitions() {
+  const defs = {};
+
+  const env = new Dotenv();
+  Object.keys(env.definitions)
+    .forEach((definition) => {
+      const key = definition.replace('process.env.', '');
+      let value = env.definitions[definition];
+
+      value = value.replace(/^"(.+(?="$))"$/, '$1');
+      value = value.replace(/%CR%/g, '\n');
+      value = value.replace(/%TAB%/g, '\t');
+
+      defs[key] = value;
+    });
+
+  return defs;
+}
+
+function removeReleaseDirectoryAndCleanDevAssets() {
+  const cleanDevAssetsDirs = allExtensionTypesDirs.map(
+      // Read all files
+      (extensionTypesDir) => readDirRecursive(
+        path.resolve(__dirname, extensionTypesDir),
+      )
+      // Resolve to the absolute path
+      .map((file) => path.resolve(__dirname, extensionTypesDir + '/' + file))
+    )
+    // One flat array
+    .flat()
+    // Filter to files that match the globalCleanDevAssets to clean
+    .filter((item) => {
+      return globalCleanDevAssets.find((globalCleanDevFolder) => {
+        return globalCleanDevFolder.test(item);
+      });
+    });
+
+  return new FileManagerPlugin({
+    onStart: {
+      delete: [
+        releaseDirAbs,
+        ...cleanDevAssetsDirs
+      ],
+      mkdir: [
+        releaseDirAbs,
+      ],
+    }
+  });
+}
+
+function discoverTemplates(tplDirectory, extensionType) {
+  return readDirRecursive(
+    path.resolve(__dirname, `${tplDirectory}/${extensionType}`),
+  );
+}
+
+function resolveExtensionTemplate(tplDirectory, extensionType) {
+  return path.resolve(
+    __dirname,
+    `${tplDirectory}/${extensionType}`,
+  );
+}
+
 function renderTemplates() {
   const renderTpls = [];
-  const tplDirectories = [templatesDir, translationsDir];
-  const allExtensionTypes = extensionTypesDirs.concat([packageTypeDir]);
 
-  tplDirectories.forEach((tplDirectory) => {
-    allExtensionTypes.forEach((extensionType) => {
-      const extTplDir = path.resolve(
-        __dirname,
-        `${tplDirectory}/${extensionType}`,
-      );
-      const templates = readDirRecursive(
-        path.resolve(__dirname, `${tplDirectory}/${extensionType}`),
-      );
+  // For templates and translation directories
+  renderDirectories.forEach((tplDirectory) => {
+    // For all extension types, including the package
+    allExtensionTypesDirs.forEach((extensionType) => {
+      const extTplDir = resolveExtensionTemplate(tplDirectory, extensionType);
+      const templates = discoverTemplates(tplDirectory, extensionType);
 
+      // For each template
       templates.forEach((file) => {
         const dest = path.resolve(__dirname, `${extensionType}/${file}`);
         const item = {
@@ -116,6 +242,7 @@ function renderTemplates() {
           transform: tagTransformation,
         };
 
+        // Render each template
         renderTpls.push(item);
       });
     });
@@ -137,23 +264,20 @@ function isPackageType() {
   return packageMode;
 }
 
-function generatePackage() {
-  const pkgEntries = [];
-
+function declarePackageGeneration() {
   // Include all files from the package directory
   const pkgFiles = readDirRecursive(packageDirAbs);
 
-  pkgFiles.forEach((file) => {
+  // Discover extensions to be included
+  const pkgEntries = pkgFiles.map((file) => {
     const packageFile = path.resolve(packageDirAbs, file);
 
-    const item = {
+    return {
       src: packageFile,
     };
-
-    pkgEntries.push(item);
   });
 
-  const Dirs = new Map();
+  const folders = new Map();
 
   // Add all extension types directories into the package
   extensionTypesDirs.forEach((extensionTypeDir) => {
@@ -162,16 +286,20 @@ function generatePackage() {
     );
 
     extTemplates.forEach((extTemplate) => {
+      // Exclude discovered files that are not xml
       if (!extTemplate.endsWith('.xml')) {
         return null;
       }
 
-      const extTemplateFile = path.parse(extTemplate).base;
+      const extTemplateFile = path.parse(extTemplate)
+        .base;
 
+      // It is already included, continue with the rest of the files
       if (packageIgnoreFiles.includes(extTemplateFile)) {
         return;
       }
 
+      // Prepare the folder to be included
       const srcFile = path.resolve(
         __dirname,
         `${extensionTypeDir}/${extTemplate}`,
@@ -184,13 +312,15 @@ function generatePackage() {
         dist: distKey,
       };
 
-      if (!Dirs.has(srcDir)) {
-        Dirs.set(srcDir, item);
+      // Ignore if it has already been included
+      if (!folders.has(srcDir)) {
+        folders.set(srcDir, item);
       }
     });
   });
 
-  pkgEntries.push(...Dirs.values());
+  // All discovered folders to be included
+  pkgEntries.push(...folders.values());
 
   // Complete the definition of the zip file
   const outputFile = path.resolve(
@@ -207,20 +337,18 @@ function generatePackage() {
   return new ZipFilesPlugin(zipFile);
 }
 
-function generateZips() {
+function declareZipsGeneration() {
   const zipDirectories = [templatesDir];
   const zipPlugins = [];
 
+  // For each templates directory to be zipped
   zipDirectories.forEach((tplDirectory) => {
+    // For all extension types
     extensionTypesDirs.forEach((extensionType) => {
-      const extZipDir = path.resolve(
-        __dirname,
-        `${tplDirectory}/${extensionType}`,
-      );
-      const templates = readDirRecursive(
-        path.resolve(__dirname, `${tplDirectory}/${extensionType}`),
-      );
+      const extZipDir = resolveExtensionTemplate(tplDirectory, extensionType);
+      const templates = discoverTemplates(tplDirectory, extensionType);
 
+      // For each template
       templates.forEach((tplFile) => {
         const srcFile = path.resolve(__dirname, `${extensionType}/${tplFile}`);
         const srcDir = path.dirname(srcFile);
@@ -235,8 +363,11 @@ function generateZips() {
 
         let renamedExtElement = extElement;
 
+        // The component must be renamed to the extension alias
         if (renamedExtElement === 'component') {
           renamedExtElement = definitions.EXTENSION_ALIAS;
+
+          // The file extension goes to the cli
         } else if (renamedExtElement === 'file') {
           renamedExtElement = 'cli';
         }
@@ -250,11 +381,12 @@ function generateZips() {
           entries: [{
             src: srcDir,
             dist: extElement,
-          }, ],
+          }],
           output: outputFile,
           format: 'zip',
         };
 
+        // Define the zip
         const itemZip = new ZipFilesPlugin(zipFile);
         zipPlugins.push(itemZip);
       });
@@ -270,17 +402,17 @@ function generateZips() {
 definitions = loadEnvironmentDefinitions();
 
 // Start clean
-removeReleaseDirectory();
+buildPlugins.push(removeReleaseDirectoryAndCleanDevAssets());
 
 // Render the manifests and translations
 buildPlugins.push(renderTemplates());
 
 if (isPackageType()) {
   // Define the package generation
-  buildPlugins.push(generatePackage());
+  buildPlugins.push(declarePackageGeneration());
 } else {
   // Just define the zips with everything
-  buildPlugins = buildPlugins.concat(generateZips());
+  buildPlugins = buildPlugins.concat(declareZipsGeneration());
 }
 
 // We are ready, Webpack generate!
