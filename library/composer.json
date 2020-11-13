@@ -1,5 +1,5 @@
 {
-    "name": "Foo Name Library",
+    "name": "extly/[EXTENSION_ALIAS]",
     "description": "Foo Name Library.",
     "require": {
         "anibalsanchez/create-pattern": "^2.0",

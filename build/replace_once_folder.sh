@@ -34,6 +34,7 @@ find $1 -name "*.xml" -type f -exec sed -i "s/foo/$EXTENSION_ALIAS/g" {} \;
 find $1 -name "*foo*" -type d -exec rename "s/foo/$EXTENSION_ALIAS/" {} \;
 find $1 -name "*foo*" -type f -exec rename "s/foo/$EXTENSION_ALIAS/" {} \;
 
+find $1 -name "*.json" -type f -exec rename "s/[EXTENSION_ALIAS]/$EXTENSION_ALIAS/" {} \;
 
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[AUTHOR\]/Extly, CB/g" {} \;
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[AUTHOR_EMAIL\]/team@extly.com/g" {} \;
