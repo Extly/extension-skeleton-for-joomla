@@ -1,0 +1,49 @@
+{
+    "name": "extly/[EXTENSION_ALIAS]",
+    "description": "[EXTENSION_DESC]",
+    "authors": [
+        {
+            "name": "Extly CB",
+            "email": "team@extly.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "anibalsanchez/extly-html-asset-tags-builder": "dev-master",
+        "phproberto/joomla-entity": "^1.7",
+        "vlucas/phpdotenv": "~2.6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.7"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "vendor-dir": "library/vendor"
+    },
+    "extra": {
+        "config": {
+            "platform": {
+                "php": "5.6.40"
+            }
+        },
+        "php-prefixer": {
+            "projectName": "EXTENSION_NAME",
+            "prefixForNamespaces": "XT_BUILD",
+            "prefixForGlobalObjects": "XT_"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "[EXTENSION_NAMESPACE]\\": "library/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "library/tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
