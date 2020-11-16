@@ -11,7 +11,7 @@ jsconfig.json
 
 # Composer
 composer.phar
-prefixed_vendor/
+vendor_prefixed/
 vendor/
 composer.lock
 
