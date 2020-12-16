@@ -1,9 +1,9 @@
-# Extly Boilerplate Buildfiles for Joomla
+# A skeleton repository for Extly's Extensions for Joomla
 
 ## tl;dr
 
 ```
-git clone ..anibalsanchez/extly-boilerplate-buildfiles-for-joomla.git
+git clone ..anibalsanchez/extension-skeleton-for-joomla.git
 npm install
 npm run build
 ```
@@ -41,7 +41,7 @@ This project has been created to standarize the creation of extensions for Jooml
 - Support of React, Preact, Babel, Vue, etc
 - It can also be extended with other Webpack plugins
 
-## Why Webpack-automated Boilerplate files for Joomla! extensions?
+## Why Webpack?
 
 [Webpack](https://webpack.js.org/) is a module bundler. Its primary purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, grouping, or packaging just about any resource or asset. So, this is an implementation to build any Joomla extension in a package that includes: a component, modules, plugins, a CLI script and a template.
 
@@ -63,7 +63,7 @@ Of course, you can install without checking if everything is updated: `npm ci`.
 
 ### Requirements
 
-- Joomla 3.8, Joomla 4 or superior
+- Joomla 3.8 or superior
 
 ## Build task
 
@@ -162,7 +162,7 @@ You can find that I use to clean many more files... I'm a little obsesive about 
 
 ### 2.0.0
 
-- Tested on Joomla 3.8 and 4
+- Tested on Joomla 3.8 or superior
 - Joomla Codestyle review
 - License GPL v2 for Joomla Core compatibility
 - PHPUnit testing
@@ -175,7 +175,7 @@ You can find that I use to clean many more files... I'm a little obsesive about 
 
 ## Acknowledgements
 
-- [joomla-extensions/boilerplate](https://github.com/joomla-extensions/boilerplate). *extly-boilerplate-buildfiles-for-joomla* project is an evolution of the original Joomla project (thanks [@roland-d](https://github.com/roland-d)!), extended to support all Joomla extension types and automation, keeping an eye on the additional complexity.
+- [joomla-extensions/boilerplate](https://github.com/joomla-extensions/boilerplate). *extension-skeleton-for-joomla* project is an evolution of the original Joomla project (thanks [@roland-d](https://github.com/roland-d)!), extended to support all Joomla extension types and automation, keeping an eye on the additional complexity.
 - [akeeba/buildfiles](https://github.com/akeeba/buildfiles). Based on [Phing](https://www.phing.info/), *akeeba/buildfiles* has a similar approach to build extensions.
 
 ## Copyright

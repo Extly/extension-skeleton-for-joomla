@@ -1,7 +1,7 @@
 {
-  "name": "extly-boilerplate-buildfiles-for-joomla-app",
+  "name": "extension-skeleton-for-joomla-app",
   "version": "1.0.0",
-  "description": "App Boilerplate files for Joomla! extensions.",
+  "description": "App A skeleton repository for Extly's Extensions for Joomla.",
   "main": "webpack.mix.js",
   "scripts": {
     "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
