@@ -3,7 +3,7 @@
  *
  * @license   License GNU General Public License version 2 or later; see LICENSE.txt
  * @author    Andrea Gentil - Anibal Sanchez <team@extly.com>
- * @copyright (c)2012-2022 Extly, CB. All rights reserved.
+ * @copyright (c)2012-2020 Extly, CB. All rights reserved.
  *
  */
 
@@ -32,14 +32,16 @@ const globalCleanDevAssets = [
 
 // Required Webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const moment = require('moment');
 const path = require('path');
-const readDirRecursive = require('fs-readdir-recursive');
+
+// TODO: Move away from webpack-zip-files-plugin (not updated in 5yrs) to filemanager-webpack-plugin
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
+
 const glob = require("glob");
 const touch = require("touch")
 
@@ -82,11 +84,10 @@ const tagTransformation = (content) => content
 function loadEnvironmentDefinitions() {
   const defs = {};
 
-  const env = new Dotenv();
-  Object.keys(env.definitions)
-    .forEach((definition) => {
-      const key = definition.replace('process.env.', '');
-      let value = env.definitions[definition];
+  const definitions = Dotenv.config();
+  Object.keys(definitions.parsed)
+    .forEach((key) => {
+      let value = definitions.parsed[key];
 
       value = value.replace(/^"(.+(?="$))"$/, '$1');
       value = value.replace(/%CR%/g, '\n');
@@ -121,14 +122,16 @@ function cleanDevAssets() {
 
 function removeReleaseDirectory() {
   return new FileManagerPlugin({
-    onStart: {
-      delete: [
-        releaseDirAbs,
-      ],
-      mkdir: [
-        releaseDirAbs,
-      ],
-    }
+    events: {
+      onStart: {
+        delete: [
+          releaseDirAbs,
+        ],
+        mkdir: [
+          releaseDirAbs,
+        ],
+      },
+    },
   });
 }
 
@@ -172,7 +175,6 @@ function renderTemplates() {
     allExtensionTypesDirs.forEach((extensionType) => {
       const extTplDir = resolveExtensionTemplate(tplDirectory, extensionType);
       const templates = discoverFilesToRender(tplDirectory, extensionType);
-      // const templatesDeprecated = discoverTemplateDeprecated(tplDirectory, extensionType);
 
       // For each template
       templates.forEach((file) => {
@@ -190,7 +192,11 @@ function renderTemplates() {
     });
   });
 
-  return new CopyWebpackPlugin(renderTpls);
+  const patterns = {
+    patterns: renderTpls,
+  };
+
+  return new CopyWebpackPlugin(patterns);
 }
 
 function isPackageType() {
