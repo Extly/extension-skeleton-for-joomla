@@ -180,5 +180,5 @@ You can find that I use to clean many more files... I'm a little obsesive about 
 
 ## Copyright
 
-- Copyright (c)2012-2020 Andrea Gentil - Anibal Sanchez. All rights reserved.
+- Copyright (c)2012-2022 Andrea Gentil - Anibal Sanchez. All rights reserved.
 - Distributed under the GNU General Public License version 2 or later

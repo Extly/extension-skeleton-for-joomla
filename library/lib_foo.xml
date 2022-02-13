@@ -3,12 +3,12 @@
   <name>Foo Name Library</name>
   <libraryname>foo</libraryname>
   <version>1.0.0</version>
-  <creationDate>2020-05-09</creationDate>
+  <creationDate>2022-02-13</creationDate>
 
 	<author>Extly, CB</author>
 	<authorEmail>team@extly.com</authorEmail>
 	<authorUrl>https://www.extly.com</authorUrl>
-	<copyright>Copyright (c)2012-2020 Extly, CB All rights reserved.</copyright>
+	<copyright>Copyright (c)2012-2022 Extly, CB All rights reserved.</copyright>
 	<license>GNU/GPLv2 www.gnu.org/licenses/gpl-2.0.html</license>
 
   <description>
@@ -21,6 +21,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tempus dol
 	</media>
   <files>
     <folder>vendor</folder>
+    <folder>vendor_prefixed</folder>
     <filename>composer.json</filename>
     <filename>lib_foo.xml</filename>
   </files>
