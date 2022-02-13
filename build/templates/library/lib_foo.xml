@@ -12,13 +12,12 @@
 [EXTENSION_DESC]
   ]]>
   </description>
-	<media destination="lib_[EXTENSION_ALIAS]" folder="media">
-		<folder>app</folder>
-	</media>
+  <media destination="lib_[EXTENSION_ALIAS]" folder="media">
+    <folder>app</folder>
+  </media>
   <files>
     <folder>vendor</folder>
     <folder>vendor_prefixed</folder>
-    <filename>composer.json</filename>
     <filename>lib_[EXTENSION_ALIAS].xml</filename>
   </files>
 </extension>
