@@ -29,9 +29,9 @@
             }
         },
         "php-prefixer": {
-            "projectName": "EXTENSION_NAME",
-            "prefixForNamespaces": "XT_BUILD",
-            "prefixForGlobalObjects": "XT_"
+            "project-name": "EXTENSION_NAME",
+            "namespaces-prefix": "XT_BUILD",
+            "global-scope-prefix": "XT_"
         }
     },
     "autoload": {
