@@ -30,9 +30,8 @@ use Joomla\CMS\MVC\Controller\BaseController;
 defined('_JEXEC') or die;
 
 // Access check.
-if (!Factory::getUser()->authorise('core.manage', 'com_foo'))
-{
-	throw new InvalidArgumentException(Text::_('JERROR_ALERTNOAUTHOR'), 404);
+if (!Factory::getUser()->authorise('core.manage', 'com_foo')) {
+    throw new InvalidArgumentException(Text::_('JERROR_ALERTNOAUTHOR'), 404);
 }
 
 // Require the helper

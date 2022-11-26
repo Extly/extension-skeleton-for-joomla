@@ -18,4 +18,6 @@ defined('_JEXEC') or die;
  * @package  [EXTENSION_NAME]
  * @since    1.0
  */
-class FooController extends BaseController { }
+class FooController extends BaseController
+{
+}

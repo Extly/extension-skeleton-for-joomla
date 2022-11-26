@@ -19,15 +19,15 @@ defined('_JEXEC') or die;
  */
 class TableFoo extends Table
 {
-	/**
-	 * Constructor
-	 *
-	 * @param   JDatabaseDriver  $db  Database driver object.
-	 *
-	 * @since   1.0
-	 */
-	public function __construct(JDatabaseDriver $db)
-	{
-		parent::__construct('#__foo_items', 'item_id', $db);
-	}
+    /**
+     * Constructor
+     *
+     * @param   JDatabaseDriver  $db  Database driver object.
+     *
+     * @since   1.0
+     */
+    public function __construct(JDatabaseDriver $db)
+    {
+        parent::__construct('#__foo_items', 'item_id', $db);
+    }
 }

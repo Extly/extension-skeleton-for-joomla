@@ -21,195 +21,181 @@ use Joomla\CMS\Plugin\CMSPlugin;
  */
 class PlgUserFoo extends CMSPlugin
 {
-	/**
-	 * Application object
-	 *
-	 * @var    CMSApplication
-	 * @since  1.0
-	 */
-	protected $app;
+    /**
+     * Application object
+     *
+     * @var    CMSApplication
+     * @since  1.0
+     */
+    protected $app;
 
-	/**
-	 * Database object
-	 *
-	 * @var    JDatabaseDriver
-	 * @since  1.0
-	 */
-	protected $db;
+    /**
+     * Database object
+     *
+     * @var    JDatabaseDriver
+     * @since  1.0
+     */
+    protected $db;
 
-	/**
-	 * Affects constructor behavior. If true, language files will be loaded automatically.
-	 *
-	 * @var    boolean
-	 * @since  1.0
-	 */
-	protected $autoloadLanguage = true;
+    /**
+     * Affects constructor behavior. If true, language files will be loaded automatically.
+     *
+     * @var    boolean
+     * @since  1.0
+     */
+    protected $autoloadLanguage = true;
 
-	/**
-	 * onUserAuthorisation.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAuthorisation()
-	{
+    /**
+     * onUserAuthorisation.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAuthorisation()
+    {
+    }
 
-	}
+    /**
+     * onUserAuthorisationFailure.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAuthorisationFailure()
+    {
+    }
 
-	/**
-	 * onUserAuthorisationFailure.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAuthorisationFailure()
-	{
+    /**
+     * onUserBeforeSave.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserBeforeSave()
+    {
+    }
 
-	}
+    /**
+     * onUserAfterSave.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAfterSave()
+    {
+    }
 
-	/**
-	 * onUserBeforeSave.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserBeforeSave()
-	{
+    /**
+     * onUserBeforeDelete.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserBeforeDelete()
+    {
+    }
 
-	}
+    /**
+     * onUserAfterDelete.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAfterDelete()
+    {
+    }
 
-	/**
-	 * onUserAfterSave.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAfterSave()
-	{
+    /**
+     * onUserLogin.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserLogin()
+    {
+    }
 
-	}
+    /**
+     * onUserLoginFailure.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserLoginFailure()
+    {
+    }
 
-	/**
-	 * onUserBeforeDelete.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserBeforeDelete()
-	{
+    /**
+     * onUserAfterLogin.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAfterLogin()
+    {
+    }
 
-	}
+    /**
+     * onUserLogout.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserLogout()
+    {
+    }
 
-	/**
-	 * onUserAfterDelete.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAfterDelete()
-	{
+    /**
+     * onUserBeforeSaveGroup.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserBeforeSaveGroup()
+    {
+    }
 
-	}
+    /**
+     * onUserAfterSaveGroup.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAfterSaveGroup()
+    {
+    }
 
-	/**
-	 * onUserLogin.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserLogin()
-	{
+    /**
+     * onUserBeforeDeleteGroup.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserBeforeDeleteGroup()
+    {
+    }
 
-	}
-
-	/**
-	 * onUserLoginFailure.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserLoginFailure()
-	{
-
-	}
-
-	/**
-	 * onUserAfterLogin.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAfterLogin()
-	{
-
-	}
-
-	/**
-	 * onUserLogout.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserLogout()
-	{
-
-	}
-
-	/**
-	 * onUserBeforeSaveGroup.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserBeforeSaveGroup()
-	{
-
-	}
-
-	/**
-	 * onUserAfterSaveGroup.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAfterSaveGroup()
-	{
-
-	}
-
-	/**
-	 * onUserBeforeDeleteGroup.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserBeforeDeleteGroup()
-	{
-
-	}
-
-	/**
-	 * onUserAfterDeleteGroup.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function onUserAfterDeleteGroup()
-	{
-
-	}
+    /**
+     * onUserAfterDeleteGroup.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function onUserAfterDeleteGroup()
+    {
+    }
 }

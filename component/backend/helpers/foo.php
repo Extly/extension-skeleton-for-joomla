@@ -20,17 +20,17 @@ defined('_JEXEC') or die;
  */
 class FooHelper
 {
-	/**
-	 * Render submenu.
-	 *
-	 * @param   string  $vName  The name of the current view.
-	 *
-	 * @return  void.
-	 *
-	 * @since   1.0
-	 */
-	public function addSubmenu($vName)
-	{
-		JHtmlSidebar::addEntry(Text::_('COM_FOO'), 'index.php?option=com_foo&view=foo', $vName == 'foo');
-	}
+    /**
+     * Render submenu.
+     *
+     * @param   string  $vName  The name of the current view.
+     *
+     * @return  void.
+     *
+     * @since   1.0
+     */
+    public function addSubmenu($vName)
+    {
+        JHtmlSidebar::addEntry(Text::_('COM_FOO'), 'index.php?option=com_foo&view=foo', $vName == 'foo');
+    }
 }

@@ -12,8 +12,8 @@
   "keywords": [],
   "author": "Andrea Gentil - Anibal Sanchez",
   "license": "GPL-2.0-or-later",
-  "devDependencies": {},
   "dependencies": {
-    "laravel-mix": "^2.1.11"
+    "laravel-mix": "^6.0.49",
+    "postcss": "^8.4.19"
   }
 }

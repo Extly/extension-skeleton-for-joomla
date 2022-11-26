@@ -8,9 +8,8 @@
  * @link       [AUTHOR_URL]
  */
 
-if (version_compare(PHP_VERSION, '5.3.10', '<'))
-{
-	die('Your host needs to use PHP 5.3.10 or higher to run this version of Joomla!');
+if (version_compare(PHP_VERSION, '5.3.10', '<')) {
+    die('Your host needs to use PHP 5.3.10 or higher to run this version of Joomla!');
 }
 
 /**
@@ -20,18 +19,16 @@ if (version_compare(PHP_VERSION, '5.3.10', '<'))
 define('_JEXEC', 1);
 set_time_limit(0);
 
-if (file_exists(__DIR__ . '/defines.php'))
-{
-	include_once __DIR__ . '/defines.php';
+if (file_exists(__DIR__ . '/defines.php')) {
+    include_once __DIR__ . '/defines.php';
 }
 
-if (!defined('_JDEFINES'))
-{
-	$path = explode(DIRECTORY_SEPARATOR, __DIR__);
-	array_pop($path);
-	$path = implode(DIRECTORY_SEPARATOR, $path);
-	define('JPATH_BASE', $path);
-	require_once JPATH_BASE . '/includes/defines.php';
+if (!defined('_JDEFINES')) {
+    $path = explode(DIRECTORY_SEPARATOR, __DIR__);
+    array_pop($path);
+    $path = implode(DIRECTORY_SEPARATOR, $path);
+    define('JPATH_BASE', $path);
+    require_once JPATH_BASE . '/includes/defines.php';
 }
 
 require_once JPATH_BASE . '/includes/framework.php';

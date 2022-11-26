@@ -3,7 +3,7 @@
   <name>Foo Name Library</name>
   <libraryname>foo</libraryname>
   <version>1.0.0</version>
-  <creationDate>2022-02-13</creationDate>
+  <creationDate>2022-11-26</creationDate>
 
 	<author>Extly, CB</author>
 	<authorEmail>team@extly.com</authorEmail>
@@ -16,13 +16,12 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tempus dolor at purus auctor, eget porta justo tempor. Vivamus finibus facilisis eros, at fringilla dolor dictum vitae.
   ]]>
   </description>
-	<media destination="lib_foo" folder="media">
-		<folder>app</folder>
-	</media>
+  <media destination="lib_foo" folder="media">
+    <folder>app</folder>
+  </media>
   <files>
     <folder>vendor</folder>
     <folder>vendor_prefixed</folder>
-    <filename>composer.json</filename>
     <filename>lib_foo.xml</filename>
   </files>
 </extension>

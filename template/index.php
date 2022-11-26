@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Factory;
 
 $app             = Factory::getApplication();
 $doc             = Factory::getDocument();
@@ -40,9 +40,8 @@ $doc->addStyleSheetVersion($this->baseurl . '/templates/' . $this->template . '/
 // Check for a custom CSS file
 $userCss = JPATH_SITE . '/templates/' . $this->template . '/css/user.css';
 
-if (file_exists($userCss) && filesize($userCss) > 0)
-{
-	$this->addStyleSheetVersion($this->baseurl . '/templates/' . $this->template . '/css/user.css', array('version' => 'auto'));
+if (file_exists($userCss) && filesize($userCss) > 0) {
+    $this->addStyleSheetVersion($this->baseurl . '/templates/' . $this->template . '/css/user.css', array('version' => 'auto'));
 }
 ?>
 

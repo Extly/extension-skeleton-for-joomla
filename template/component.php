@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Factory;
 
 $app             = Factory::getApplication();
 $doc             = Factory::getDocument();
