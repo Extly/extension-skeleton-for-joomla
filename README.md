@@ -146,6 +146,10 @@ You can find that I use to clean many more files... I'm a little obsesive about 
 
 ## Changelog
 
+### 4.3.0
+
+- Reorganized based on `make`
+
 ### 3.0.0
 
 - New Global Clean Deveveloment Assets

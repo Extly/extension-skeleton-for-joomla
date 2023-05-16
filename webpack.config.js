@@ -10,17 +10,6 @@
 // Array of Webpack plugins
 let buildPlugins = [];
 
-// Extension directories to be visited
-const packageTypeDir = 'package';
-const extensionTypesDirs = [
-  'component',
-  'modules',
-  'plugins',
-  'file',
-  'template',
-  'library',
-  'platform',
-];
 
 // Only template xml are processed, other xml config files are ignored
 const packageIgnoreFiles = ['config.xml'];

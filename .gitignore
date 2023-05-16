@@ -18,12 +18,6 @@ composer.lock
 # Node.js
 node_modules/
 
-# Cordova
-/hooks/
-#/platforms/
-#/plugins/
-/typings/
-
 # Build files - Release directory
 /build/release
 /build/templates/platform
@@ -32,6 +26,7 @@ node_modules/
 # Test configuration
 /tests/config.php
 /Tests/config.php
+.phpunit.result.cache
 
 # Version and manifest files
 /component/*.xml
@@ -42,12 +37,6 @@ node_modules/
 /component/language/*
 /modules/*/*/language/*
 /plugins/*/*/language/*
-
-# Ionic
-.sourcemaps/
-tslint.json
-/www/assets/*
-/www/build/*
 
 # App for Joomla
 /component/media/app/

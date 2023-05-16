@@ -1,6 +1,6 @@
 <?php
 
-$header = <<<'EOF'
+$fileHeaderComment = <<<'EOF'
 @package     A skeleton repository for Extly's Extensions for Joomla
 
 @author      Extly, CB. <team@extly.com>
@@ -12,16 +12,17 @@ EOF;
 
 return (new PhpCsFixer\Config())
     ->setRules([
-        // Symfony PHP framework 6.2/.php-cs-fixer.dist.php
-        // https://github.com/symfony/symfony/blob/6.2/.php-cs-fixer.dist.php
+        // Symfony PHP framework 6.3/.php-cs-fixer.dist.php
+        // https://github.com/symfony/symfony/blob/6.3/.php-cs-fixer.dist.php
         '@PHP71Migration' => true,
         '@PHPUnit75Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'protected_to_private' => false,
+        'native_constant_invocation' => ['strict' => false],
         'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => false],
         'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
-        'header_comment' => ['header' => $header],
+        'header_comment' => ['header' => $fileHeaderComment],
         'modernize_strpos' => true,
         'get_class_to_class_keyword' => true,
 
