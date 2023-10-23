@@ -36,6 +36,6 @@ find $1 -name "*foo*" -type f -exec rename "s/foo/$EXTENSION_ALIAS/" {} \;
 
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[AUTHOR\]/Extly, CB/g" {} \;
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[AUTHOR_EMAIL\]/team@extly.com/g" {} \;
-find $1 -type f -not -name "*.sh" -exec sed -i "s/\[COPYRIGHT\]/Copyright (c)2012-2022 Extly, CB All rights reserved./g" {} \;
+find $1 -type f -not -name "*.sh" -exec sed -i "s/\[COPYRIGHT\]/Copyright (c)2012-2023 Extly, CB All rights reserved./g" {} \;
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[LICENSE\]/GNU General Public License version 3 or later; see LICENSE.txt/g" {} \;
 find $1 -type f -not -name "*.sh" -exec sed -i "s/\[AUTHOR_URL\]/https\:\/\/www\.extly\.com/g" {} \;
